@@ -94,7 +94,12 @@ fun minDivisor(n: Int): Int = TODO()
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int = TODO()
+fun maxDivisor(n: Int): Int {
+    for (i in n - 1 downTo 1 step 1)
+        if (n % i == 0) return i
+    return 0
+}
+
 
 /**
  * Простая (2 балла)
@@ -192,7 +197,42 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+
+    fun search(n: Int, pos: Int): Int {
+        var tempCounter: Int = 0
+        var tempNumber: Int = n * n
+        while (true) {
+            if (tempCounter == pos)
+                return tempNumber % 10
+            tempNumber /= 10
+            tempCounter++
+        }
+    }
+
+    var numberInNum: Int = 0
+    var counter: Int = 1
+    var temp: Int = 0
+    var flag: Boolean = true
+    var division: Boolean = true
+    while (flag) {
+        temp = counter
+        temp *= temp
+        while (division) {
+            if (temp >= 1) {
+                temp /= 10
+                numberInNum++
+            } else division = false
+        }
+        if (numberInNum >= n) {
+            return (search(counter, numberInNum - n))
+            flag = false
+        }
+        division = true
+        counter++
+    }
+    return 0
+}
 
 /**
  * Сложная (5 баллов)
